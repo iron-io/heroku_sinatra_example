@@ -7,4 +7,8 @@ To run in development, run:
 
     IRON_WORKER_TOKEN=my_token IRON_WORKER_PROJECT_ID=my_project_id rackup -p 3000 config.ru
 
+To run on heroku:
+
+- heroku addons:add iron_worker
+- heroku addons:add iron_mq
 
