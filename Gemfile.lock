@@ -1,0 +1,49 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activesupport (3.1.3)
+      multi_json (~> 1.0)
+    addressable (2.2.6)
+    faraday (0.7.5)
+      addressable (~> 2.2.6)
+      multipart-post (~> 1.1.3)
+      rack (< 2, >= 1.1.0)
+    iron_worker (2.1.1)
+      rest-client
+      rest-client
+      zip
+      zip
+    ironmq (1.2.7)
+      typhoeus
+      typhoeus
+    mime-types (1.17.2)
+    multi_json (1.0.4)
+    multipart-post (1.1.4)
+    rack (1.3.5)
+    rack-protection (1.1.4)
+      rack
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    simple_oauth (0.1.5)
+    sinatra (1.3.1)
+      rack (>= 1.3.4, ~> 1.3)
+      rack-protection (>= 1.1.2, ~> 1.1)
+      tilt (>= 1.3.3, ~> 1.3)
+    tilt (1.3.3)
+    twitter (2.0.2)
+      activesupport (>= 2.3.9, < 4)
+      faraday (~> 0.7)
+      multi_json (~> 1.0)
+      simple_oauth (~> 0.1)
+    typhoeus (0.3.3)
+      mime-types
+    zip (2.0.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  iron_worker
+  ironmq
+  sinatra
+  twitter

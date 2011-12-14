@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>Powered by Iron.io</title>
+
+  <style type="text/css">
+      body {
+          margin-top: 1.0em;
+          font-family: Helvetica, Arial, FreeSans, san-serif;
+      }
+
+      a:visited {
+          color: darkblue;
+      }
+
+          /*a:visited#main {*/
+          /*color: red;*/
+          /*}*/
+
+      #container {
+          margin: 0 auto;
+          width: 800px;
+      }
+
+      h1 {
+          font-size: 3.1em;
+          margin-bottom: 3px;
+          /*letter-spacing: -2px;*/
+      }
+
+      h1 .sw {
+          color: #1e90ff;
+      }
+
+      h1 .iw {
+          color: #b22222;
+      }
+
+      h1 .small {
+          font-size: 0.4em;
+      }
+
+      h1 a {
+          text-decoration: none
+      }
+
+      h2 {
+          font-size: 1.5em;
+          color: #1e90ff;
+      }
+
+      h3 {
+          text-align: center;
+          color: #1e90ff;
+      }
+
+      a {
+          color: #1e90ff;
+      }
+
+      .description {
+          font-size: 1.2em;
+          margin-bottom: 30px;
+          margin-top: 30px;
+      }
+
+      .download {
+          float: right;
+      }
+
+      pre {
+          background: #000;
+          color: #fff;
+          padding: 15px;
+      }
+
+      hr {
+          border: 0;
+          width: 80%;
+          border-bottom: 1px solid #aaa
+      }
+
+      .footer {
+          text-align: center;
+          padding-top: 30px;
+          font-style: italic;
+      }
+  </style>
+</head>
+
+<body>
+
+<br/><br/>
+
+<div id="container">
+
+  <h1><a href="http://www.iron.io" id="main">Powered by Iron.io</a></h1>
+
+  <% if @msg %>
+      <div>
+        Latest Tweet:
+        <br/>
+    <span style="font-weight: bold;">
+      <%= @msg.body %>
+    </span>
+      </div>
+  <% end %>
+
+  <div class="description">
+    <form action="/run_uber_worker" method="post">
+      <button>Run UberWorker</button>
+    </form>
+  </div>
+
+
+  <div class="footer">
+  </div>
+
+</div>
+
+</body>
+</html>
+
