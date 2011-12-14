@@ -1,7 +1,7 @@
 
 class TweetWorker < IronWorker::Base
 
-  merge_gem 'ironmq'
+  merge_gem 'iron_mq'
   merge_gem 'twitter'
 
   attr_accessor :token, :project_id, :queue_name
