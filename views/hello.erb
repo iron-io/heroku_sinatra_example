@@ -88,6 +88,11 @@
           font-style: italic;
       }
   </style>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.ba-dotimeout.min.js"></script>
+
+
 </head>
 
 <body>
@@ -98,20 +103,53 @@
 
   <h1><a href="http://www.iron.io" id="main">Powered by Iron.io</a></h1>
 
-  <% if @msg %>
-      <div>
+  <div>
+    <% if @msg %>
         Latest Tweet:
         <br/>
     <span style="font-weight: bold;">
       <%= @msg.body %>
     </span>
-      </div>
-  <% end %>
+    <% else %>
+        <div style="color: red;">
+          There are no more tweets in the queue. Run TweetWorker to get another one.
+        </div>
+    <% end %>
+  </div>
 
   <div class="description">
-    <form action="/run_uber_worker" method="post">
-      <button>Run UberWorker</button>
+    <form action="/run_tweet_worker" method="post">
+      <button>Run TweetWorker</button>
     </form>
+  </div>
+
+  <script>
+      var keep_going = true;
+      $.doTimeout(2000, function () {
+
+          var jqxhr = $.getJSON("/worker_status", function (json) {
+//              alert("success");
+              console.log("json");
+              console.log(json);
+              if (json.status != null) {
+                  $("#status_div").html("Task status: " + json.status);
+                  keep_going = true;
+              } else {
+                  keep_going = false;
+              }
+          })
+//          .success(function() { alert("second success"); })
+                  .error(function () {
+                      alert("error");
+                      keep_going = false;
+                  })
+//          .complete(function() { alert("complete"); });
+
+          return keep_going;
+      });
+  </script>
+  <div id="status_div">
+
   </div>
 
 

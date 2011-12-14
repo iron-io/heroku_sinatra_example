@@ -1,5 +1,5 @@
 
-class UberWorker < IronWorker::Base
+class TweetWorker < IronWorker::Base
 
   merge_gem 'ironmq'
   merge_gem 'twitter'
