@@ -44,6 +44,9 @@ end
 
 
 get '/' do
+  if session[:worker_id]
+    @running = true
+  end
   @msg = settings.ironmq.messages.get(:queue_name=>settings.queue_name)
   @msg.delete if @msg
   erb :hello

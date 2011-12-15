@@ -103,6 +103,18 @@
 
   <h1><a href="http://www.iron.io" id="main">Powered by Iron.io</a></h1>
 
+  <p>
+    This is an example application that uses <a href="http://www.iron.io/products/mq">IronMQ</a>
+    and <a href="http://www.iron.io/products/worker">IronWorker</a> together. If you click
+    the &quot;Run TweetWorker&quot; button below, that will queue up a
+    <a href="https://github.com/iron-io/heroku_sinatra_example/blob/master/workers/tweet_worker.rb">TweetWorker</a> task
+    on IronWorker. TweetWorker is a worker that gets the latest tweet tagged with #cloud and push that
+    tweet onto a queue on IronMQ.
+    <br/><br/>
+    This page you are looking at grabs tweets off the same queue on IronMQ and displays them. To see
+    more tweets, keep running TweetWorker.
+  </p>
+
   <div>
     <% if @msg %>
         Latest Tweet:
@@ -136,6 +148,7 @@
                   keep_going = true;
               } else {
                   keep_going = false;
+                  $("#status_indicator").hide();
               }
           })
 //          .success(function() { alert("second success"); })
@@ -148,13 +161,27 @@
           return keep_going;
       });
   </script>
-  <div id="status_div">
+  <div id="status_container" style="display: none;">
+    <div id="status_indicator" style="display: inline-block; width: 40px;">
+      <img src="/images/ajax-loader.gif"/>
+    </div>
+    <div id="status_div">
 
+    </div>
   </div>
+
+  <script>
+      <% if @running %>
+      $("#status_container").show();
+      <% else %>
+      $("#status_container").hide();
+      <% end %>
+  </script>
 
 
   <div class="footer">
-    Source code for this project is on <a href="https://github.com/iron-io/heroku_sinatra_example" target="_blank">Github</a>
+    Source code for this project is on
+    <a href="https://github.com/iron-io/heroku_sinatra_example" target="_blank">Github</a>
   </div>
 
 </div>
