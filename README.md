@@ -8,6 +8,10 @@ Clone this repo:
 Now cd into the directory:
 
     cd heroku_sinatra_example
+    
+Install required gems:
+
+    sudo bundle install
 
 Now create a heroku app for it (this assumes you're already [logged into heroku](http://devcenter.heroku.com/articles/quickstart)):
 
