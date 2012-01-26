@@ -1,5 +1,7 @@
 require 'yaml'
 require 'iron_worker'
+require 'iron_mq'
+require 'sinatra'
 
 @config = {}
 @config = YAML.load_file('config.yml') if File.exists?('config.yml')
