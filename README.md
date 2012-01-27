@@ -1,17 +1,26 @@
 Getting Started
 ===============
 
-First you need a token and project_id from your Iron.io account. Login at http://www.iron.io
-to get it.
+Clone this repo:
 
-To run in development, run:
+    git clone git@github.com:iron-io/heroku_sinatra_example.git
+    
+Now cd into the directory:
 
-    IRON_WORKER_TOKEN=my_token IRON_WORKER_PROJECT_ID=my_project_id rackup -p 3000 config.ru
+    cd heroku_sinatra_example
+    
+Install required gems:
 
-To run on heroku:
+    sudo bundle install
 
-    heroku addons:add iron_worker
-    heroku addons:add iron_mq
+Now create a heroku app for it (this assumes you're already [logged into heroku](http://devcenter.heroku.com/articles/quickstart)):
+
+    heroku create --stack cedar
+    
+Ok, now we're ready to run on Heroku, but first we need to add the Iron.io Add-ons:
+
+    heroku addons:add iron_worker:starter
+    heroku addons:add iron_mq:rust
 
 Then just push to heroku! 
 
@@ -21,3 +30,15 @@ Live Demo
 =========
 
 Here's a live running example of this app: http://evening-planet-3202.herokuapp.com/
+
+Development
+===========
+
+To run in development, you need a token and project_id from your Iron.io account. Login at http://www.iron.io
+to get it.
+
+Then start this sinatra app using this command, replacing my_token and my_project_id with your credentials:
+
+    IRON_WORKER_TOKEN=my_token IRON_WORKER_PROJECT_ID=my_project_id rackup -p 3000 config.ru
+
+
