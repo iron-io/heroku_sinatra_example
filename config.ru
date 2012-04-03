@@ -2,13 +2,17 @@ require 'yaml'
 require 'iron_worker'
 require 'iron_mq'
 require 'sinatra'
+require 'uber_config'
 
-@config = {}
-@config = YAML.load_file('config.yml') if File.exists?('config.yml')
+@config = UberConfig.load
+p @config
+@config = {} unless @config
 
 @config["iron"] ||= {}
 @config["iron"]["token"] ||= ENV['IRON_WORKER_TOKEN']
 @config["iron"]["project_id"] ||= ENV['IRON_WORKER_PROJECT_ID']
+
+p @config
 
 IronWorker.configure do |iwc|
   iwc.token = @config["iron"]["token"]

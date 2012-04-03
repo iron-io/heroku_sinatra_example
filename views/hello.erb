@@ -144,7 +144,14 @@
               console.log("json");
               console.log(json);
               if (json.status != null) {
-                  $("#status_div").html("Task status: " + json.status);
+                  var msg = "Task status: " + json.status;
+                  if (json.status != "complete") {
+//                  if (json.msg != null) {
+                      msg = msg + "<br/>Percent complete: " + json.percent + "%";
+//                  }
+                      msg = msg + "<br/>" + json.msg;
+                  }
+                  $("#status_div").html(msg);
                   keep_going = true;
               } else {
                   keep_going = false;

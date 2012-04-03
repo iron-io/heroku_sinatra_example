@@ -4,13 +4,13 @@ require_relative 'workers/tweet_worker'
 
 enable :sessions
 set :public_folder, File.dirname(__FILE__) + '/static'
-set :ironmq, IronMQ::Client.new('token'=>ENV['IRON_WORKER_TOKEN'], 'project_id'=>ENV['IRON_WORKER_PROJECT_ID'])
+#set :ironmq, IronMQ::Client.new('token'=>ENV['IRON_WORKER_TOKEN'], 'project_id'=>ENV['IRON_WORKER_PROJECT_ID'])
 set :queue_name, "tweets"
 
 post '/run_tweet_worker' do
   worker = TweetWorker.new
-  worker.token = ENV['IRON_WORKER_TOKEN']
-  worker.project_id = ENV['IRON_WORKER_PROJECT_ID']
+  worker.token = IronWorker.config.token
+  worker.project_id = IronWorker.config.project_id
   puts "settings.queue_name=" + settings.queue_name
   worker.queue_name = settings.queue_name
   # todo: store worker id in session then ajax show progress
@@ -33,6 +33,8 @@ get '/worker_status' do
     ret['msg'] = "Worker running"
     ret['task_id'] = session[:worker_id]
     ret['status'] = status["status"]
+    ret['percent'] = status['percent'] || 0
+    ret['msg'] = status['msg'] || ""
     if status["status"] != "queued" && status["status"] != "running"
       session[:worker_id] = nil
     end
