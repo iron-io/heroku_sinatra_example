@@ -1,6 +1,4 @@
 require 'sinatra'
-require_relative 'workers/tweet_worker'
-#require_relative ''
 
 enable :sessions
 set :public_folder, File.dirname(__FILE__) + '/static'
