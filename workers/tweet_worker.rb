@@ -4,7 +4,7 @@ require 'iron_mq'
 puts "Running..."
 p params
 
-tweet = Twitter.search("#cloud -rt").first.text
+tweet = Twitter.search("#cloud -rt").results.first.text
 puts "tweet=#{tweet}"
 
 ironmq = IronMQ::Client.new('token' => params['token'], 'project_id' => params['project_id'])
