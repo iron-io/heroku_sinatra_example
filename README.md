@@ -37,7 +37,7 @@ And put them in a file in this directory called `iron.json` in this format:
 
 Upload the worker:
 
-    iron_worker upload workers/tweet
+    iron_worker upload workers/TweetWorker
 
 Then just push to heroku! 
 
