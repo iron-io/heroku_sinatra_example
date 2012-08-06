@@ -13,7 +13,7 @@ post '/run_tweet_worker' do
   ## todo: store worker id in session then ajax show progress
   #worker.queue
 
-  task = settings.iron_worker.queue("TweetWorker", {"queue_name"=>settings.queue_name}.merge(settings.iron_worker.api.options))
+  task = settings.iron_worker.tasks.create("TweetWorker", {"queue_name"=>settings.queue_name}.merge(settings.iron_worker.api.options))
 
   session[:worker_id] = task.id
   puts 'worker_id in session=' + task.id
