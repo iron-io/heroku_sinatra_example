@@ -7,7 +7,8 @@ p params
 tweet = Twitter.search("#cloud -rt").results.first.text
 puts "tweet=#{tweet}"
 
-ironmq = IronMQ::Client.new('token' => params['token'], 'project_id' => params['project_id'])
-response = ironmq.messages.post(tweet, :queue_name => queue_name)
+mq_params = params['mq']
+ironmq = IronMQ::Client.new('token' => mq_params['token'], 'project_id' => mq_params['project_id'])
+response = ironmq.messages.post(tweet, :queue_name => mq_params['queue_name'])
 
 puts "tweet put on queue. " + response.inspect
