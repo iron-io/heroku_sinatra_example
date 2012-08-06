@@ -22,6 +22,23 @@ Ok, now we're ready to run on Heroku, but first we need to add the Iron.io Add-o
     heroku addons:add iron_worker:starter
     heroku addons:add iron_mq:rust
 
+Grab your IronWorker project id and token from:
+
+    heroku config
+
+And put them in a file in this directory called `iron.json` in this format:
+
+```javascript
+{
+    "project_id":"PROJECT_ID",
+    "token":"TOKEN"
+}
+```
+
+Upload the worker:
+
+    iron_worker upload workers/tweet
+
 Then just push to heroku! 
 
     git push heroku master

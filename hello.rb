@@ -4,20 +4,24 @@ require_relative 'workers/tweet_worker'
 
 enable :sessions
 set :public_folder, File.dirname(__FILE__) + '/static'
-#set :ironmq, IronMQ::Client.new('token'=>ENV['IRON_WORKER_TOKEN'], 'project_id'=>ENV['IRON_WORKER_PROJECT_ID'])
+#set :ironmq, IronMQ::Client.new('token'=>ENV['IRON_MQ_TOKEN'], 'project_id'=>ENV['IRON_MQ_PROJECT_ID'])
+set :iron_worker, IronWorkerNG::Client.new(:token=>ENV['IRON_WORKER_TOKEN'], :project_id=>ENV['IRON_WORKER_PROJECT_ID'])
 set :queue_name, "tweets"
 
 post '/run_tweet_worker' do
-  worker = TweetWorker.new
-  worker.token = IronWorker.config.token
-  worker.project_id = IronWorker.config.project_id
-  puts "settings.queue_name=" + settings.queue_name
-  worker.queue_name = settings.queue_name
-  # todo: store worker id in session then ajax show progress
-  worker.queue
 
-  session[:worker_id] = worker.task_id
-  puts 'worker_id in session=' + worker.task_id
+  #worker = TweetWorker.new
+  #worker.token = IronWorker.config.token
+  #worker.project_id = IronWorker.config.project_id
+  #puts "settings.queue_name=" + settings.queue_name
+  #worker.queue_name = settings.queue_name
+  ## todo: store worker id in session then ajax show progress
+  #worker.queue
+
+  task = settings.iron_worker.queue("TweetWorker", {"queue_name"=>settings.queue_name}.merge(settings.iron_worker.api.config))
+
+  session[:worker_id] = task.id
+  puts 'worker_id in session=' + task.id
   #worker.wait_until_complete
   #p worker.status
   #"status=" + worker.status.inspect

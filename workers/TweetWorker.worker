@@ -1,0 +1,4 @@
+runtime 'ruby'
+exec 'tweet_worker.rb'
+gem 'iron_mq'
+gem 'twitter'

@@ -1,5 +1,5 @@
 require 'yaml'
-require 'iron_worker'
+require 'iron_worker_ng'
 require 'iron_mq'
 require 'sinatra'
 require 'uber_config'
