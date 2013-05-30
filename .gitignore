@@ -1,3 +1,4 @@
 .idea/*
 config.yml
 iron.json
+Gemfile.lock
