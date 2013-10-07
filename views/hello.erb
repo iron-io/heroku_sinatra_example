@@ -135,38 +135,33 @@
     </form>
   </div>
 
-  <script>
-      var keep_going = true;
-      $.doTimeout(2000, function () {
+  <script type="text/javascript">
+    var keep_going = true;
+    $.doTimeout(2000, function () {
+      var jqxhr = $.getJSON("/worker_status", function (json) {
+        if (json.status != null) {
+          var msg = "Task status: " + json.status;
+          if (json.status != "complete") {
+            msg = msg + "<br/>Percent complete: " + json.percent + "%";
+            msg = msg + "<br/>" + json.msg;
+          } else {
+            msg = msg + "<br />Page will be reloaded in 3 seconds."
+            setInterval(function () { location.reload(); }, 3000);
+          }                  
+          $("#status_div").html(msg);
+          keep_going = true;
+        } else {
+          keep_going = false;
+          $("#status_indicator").hide();
+        }
+      })
+      .error(function () {
+        alert("error");
+        keep_going = false;
+      })
 
-          var jqxhr = $.getJSON("/worker_status", function (json) {
-//              alert("success");
-              console.log("json");
-              console.log(json);
-              if (json.status != null) {
-                  var msg = "Task status: " + json.status;
-                  if (json.status != "complete") {
-//                  if (json.msg != null) {
-                      msg = msg + "<br/>Percent complete: " + json.percent + "%";
-//                  }
-                      msg = msg + "<br/>" + json.msg;
-                  }
-                  $("#status_div").html(msg);
-                  keep_going = true;
-              } else {
-                  keep_going = false;
-                  $("#status_indicator").hide();
-              }
-          })
-//          .success(function() { alert("second success"); })
-                  .error(function () {
-                      alert("error");
-                      keep_going = false;
-                  })
-//          .complete(function() { alert("complete"); });
-
-          return keep_going;
-      });
+      return keep_going;
+    });
   </script>
   <div id="status_container" style="display: none;">
     <div id="status_indicator" style="display: inline-block; width: 40px;">
