@@ -30,14 +30,34 @@ And put them in a file in this directory called `iron.json` in this format:
 
 ```javascript
 {
-    "project_id":"PROJECT_ID",
-    "token":"TOKEN"
+  "project_id": "PROJECT_ID",
+  "token": "TOKEN"
 }
 ```
 
 Upload the worker:
 
     iron_worker upload workers/TweetWorker
+
+
+Now, open and fill configuration file named `config.json`:
+
+```javascript
+{
+  // This section is optional, environment variables have higher priority
+  "iron": {
+    "project_id": "PROJECT_ID",
+    "token": "TOKEN"
+  },
+  // Twitter API requires authorization since v1.1
+  "twitter": {
+    "consumer_key": "YOUR_CONSUMER_KEY",
+    "consumer_secret": "YOUR_CONSUMER_SECRET",
+    "oauth_token": "YOUR_OAUTH_TOKEN",
+    "oauth_token_secret": "YOUR_OAUTH_TOKEN_SECRET"
+  }
+}
+```
 
 Then just push to heroku! 
 
@@ -56,6 +76,6 @@ to get it.
 
 Then start this sinatra app using this command, replacing my_token and my_project_id with your credentials:
 
-    IRON_WORKER_TOKEN=my_token IRON_WORKER_PROJECT_ID=my_project_id rackup -p 3000 config.ru
+    IRON_IO_TOKEN=my_token IRON_IO_PROJECT_ID=my_project_id rackup -p 3000 config.ru
 
 
