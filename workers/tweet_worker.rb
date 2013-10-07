@@ -9,6 +9,6 @@ puts "tweet=#{tweet}"
 
 mq_params = params['mq']
 ironmq = IronMQ::Client.new('token' => mq_params['token'], 'project_id' => mq_params['project_id'])
-response = ironmq.messages.post(tweet, :queue_name => mq_params['queue_name'])
+response = ironmq.queue(mq_params['queue_name']).post(tweet)
 
 puts "tweet put on queue. " + response.inspect

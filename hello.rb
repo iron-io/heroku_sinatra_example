@@ -49,7 +49,7 @@ get '/' do
   if session[:worker_id]
     @running = true
   end
-  @msg = settings.ironmq.messages.get(:queue_name=>settings.queue_name)
+  @msg = settings.ironmq.queue(settings.queue_name).get
   @msg.delete if @msg
   erb :hello
 end
